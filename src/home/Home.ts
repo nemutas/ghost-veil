@@ -58,19 +58,23 @@ class Home {
 
 	private setGsapAnimation = () => {
 		this.imageElements.forEach((el, i) => {
-			gsap.to(el, {
-				'--clip-height': '100%',
-				scrollTrigger: {
-					scroller: this.scrollElement,
-					trigger: el,
-					scrub: true,
-					start: '0 100%',
-					end: '0 51%',
-					horizontal: true,
-					once: true,
-					onUpdate: self => (datas.scrollProgress[i] = self.progress)
+			gsap.fromTo(
+				el,
+				{ '--clip-height': '0%' },
+				{
+					'--clip-height': '100%',
+					scrollTrigger: {
+						scroller: this.scrollElement,
+						trigger: el,
+						scrub: true,
+						start: '0 100%',
+						end: '0 51%',
+						horizontal: true,
+						once: true,
+						onUpdate: self => (datas.scrollProgress[i] = self.progress)
+					}
 				}
-			})
+			)
 		})
 	}
 }
