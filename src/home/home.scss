@@ -1,0 +1,111 @@
+@import '../modules/styles/common.scss';
+@import '../modules/styles/mixin/media.scss';
+
+.home-main {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	background-color: #f0f0f0;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.home-contents {
+	position: relative;
+	width: fit-content;
+	height: 100%;
+
+	padding: 5rem 10rem;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	column-gap: 10rem;
+
+	overflow: auto;
+}
+
+.top-text {
+	min-width: clamp(10vw, 45%, 50vw);
+
+	padding: 5rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	&__contents {
+		&__title {
+			white-space: nowrap;
+			font-size: 8rem;
+		}
+		&__desc {
+			font-size: 3rem;
+		}
+	}
+}
+
+.works {
+	counter-reset: section;
+
+	height: 70rem;
+
+	@include md() {
+		height: 70%;
+	}
+
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	column-gap: 10rem;
+
+	list-style: none;
+}
+
+.work {
+	--clip-height: 0%;
+
+	height: 100%;
+
+	display: flex;
+	align-items: flex-end;
+	flex-direction: row;
+	column-gap: 5rem;
+
+	&__image {
+		height: 100%;
+		object-fit: cover;
+		clip-path: polygon(0 0, 100% 0, 100% var(--clip-height), 0 var(--clip-height));
+	}
+
+	&__desc {
+		min-height: 35%;
+
+		display: flex;
+		flex-direction: column;
+		row-gap: 1rem;
+
+		&__title {
+			font-size: max(20px, 3rem);
+
+			&::before {
+				counter-increment: section;
+				font-family: 'Roboto Mono', monospace;
+				content: counter(section) '.';
+				margin-right: 0.3em;
+			}
+		}
+
+		&__list {
+			font-family: 'Roboto Mono', monospace;
+			font-size: max(15px, 2.2rem);
+			list-style: armenian;
+			padding-left: 2.3em;
+
+			display: flex;
+			flex-direction: column;
+			row-gap: 0.3em;
+		}
+	}
+}

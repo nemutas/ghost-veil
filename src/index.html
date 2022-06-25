@@ -5,12 +5,74 @@
 		<link rel="icon" type="image/svg+xml" href="meta/favicon.svg" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Vite App</title>
-		<script type="module" src="./entry/main.ts" defer></script>
-		<link rel="stylesheet" href="./entry/main.scss" />
+		<script type="module" src="./home/Home.ts" defer></script>
+		<link rel="stylesheet" href="./home/home.scss" />
 	</head>
 	<body>
-		<main>
-			<div class="text">Hello</div>
+		<main class="home-main">
+			<div class="three-container"></div>
+			<div class="home-contents">
+				<!-- top text -->
+				<div class="top-text">
+					<div class="top-text__contents">
+						<h1 class="top-text__contents__title">Ghost Veil</h1>
+						<div class="top-text__contents__desc">
+							Ghost Veil is an effect of 'threejs plane' overlaid on 'dom image'.<br />
+							The images used are excellent work by
+							<a href="https://twitter.com/wlopwangling" target="_blank" rel="noopener noreferrer">WLOP</a>.
+						</div>
+					</div>
+				</div>
+				<!-- images -->
+				<ul class="works">
+					<li class="work">
+						<img class="work__image" src="/assets/images/wlop01.jpg" />
+						<div class="work__desc">
+							<h2 class="work__desc__title">Concepts</h2>
+							<ul class="work__desc__list">
+								<li>Dom Sync</li>
+								<li>Hrizontal Scroll</li>
+							</ul>
+						</div>
+					</li>
+					<li class="work">
+						<img class="work__image" src="/assets/images/wlop02.jpg" />
+						<div class="work__desc">
+							<h2 class="work__desc__title">SNS</h2>
+							<ul class="work__desc__list">
+								<li><a href="https://twitter.com/focru_ino" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+								<li>
+									<a href="https://github.com/nemutas/ghost-veil" target="_blank" rel="noopener noreferrer">GitHub</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+					<li class="work">
+						<img class="work__image" src="/assets/images/wlop03.jpg" />
+						<div class="work__desc">
+							<h2 class="work__desc__title">Skills</h2>
+							<ul class="work__desc__list">
+								<li>Three.js</li>
+								<li>TypeScript</li>
+								<li>GLSL</li>
+								<li>Gsap</li>
+							</ul>
+						</div>
+					</li>
+					<li class="work">
+						<img class="work__image" src="/assets/images/wlop04.jpg" />
+						<div class="work__desc">
+							<h2 class="work__desc__title">References</h2>
+							<ul class="work__desc__list">
+								<li><a href="https://yudouhu.org/" target="_blank" rel="noopener noreferrer">Yudouhu Portfolio</a></li>
+								<li>
+									<a href="https://github.com/pschroen/alien.js/" target="_blank" rel="noopener noreferrer">Alien.js</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+				</ul>
+			</div>
 		</main>
 	</body>
 </html>
