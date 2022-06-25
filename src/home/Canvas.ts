@@ -14,6 +14,7 @@ export class Canvas extends TCanvas {
 	private flowmap?: Flowmap
 	private mousePos = new THREE.Vector2()
 	private currentProgress = datas.scrollProgress.map(() => 0)
+	private isLoaded: boolean[] = []
 
 	constructor(private parentNode: ParentNode) {
 		super(parentNode)
@@ -34,8 +35,11 @@ export class Canvas extends TCanvas {
 
 		const elementObjects: { element: HTMLImageElement; texture: THREE.Texture }[] = []
 
-		elements.forEach(element => {
-			const texture = new THREE.TextureLoader().load(element.src)
+		elements.forEach((element, i) => {
+			this.isLoaded.push(false)
+			const texture = new THREE.TextureLoader().load(element.src, () => {
+				this.isLoaded[i] = true
+			})
 			texture.encoding = THREE.sRGBEncoding
 			elementObjects.push({ element, texture })
 		})
@@ -67,6 +71,8 @@ export class Canvas extends TCanvas {
 	}
 
 	private update = () => {
+		if (!this.isLoaded.every(x => x)) return
+
 		this.dsPlanes.forEach((plane, i) => {
 			plane.update()
 			this.currentProgress[i] = THREE.MathUtils.lerp(this.currentProgress[i], datas.scrollProgress[i], 0.005)
