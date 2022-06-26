@@ -15,7 +15,7 @@ class Home {
 	private scrollCurrent = 0
 	private scrollTarget = 0
 
-	private gsapTweens: gsap.core.Tween[] = []
+	private gsapTimelines: gsap.core.Timeline[] = []
 
 	private canvas: Canvas
 
@@ -61,25 +61,22 @@ class Home {
 	}
 
 	private setGsapAnimation = () => {
-		this.gsapTweens = this.imageElements.map((el, i) => {
-			const tween = gsap.fromTo(
-				el,
-				{ '--clip-height': '0%' },
-				{
-					'--clip-height': '100%',
-					scrollTrigger: {
-						scroller: this.scrollElement,
-						trigger: el,
-						scrub: true,
-						start: '0 100%',
-						end: '0 51%',
-						horizontal: true,
-						once: true,
-						onUpdate: self => (datas.scrollProgress[i] = self.progress)
-					}
+		this.gsapTimelines = this.imageElements.map((el, i) => {
+			const tl = gsap.timeline({
+				scrollTrigger: {
+					scroller: this.scrollElement,
+					trigger: el,
+					scrub: 0.5,
+					start: '0 100%',
+					end: '0 51%',
+					horizontal: true,
+					once: true,
+					onUpdate: self => (datas.scrollProgress[i] = self.progress)
 				}
-			)
-			return tween
+			})
+			tl.set(el, { '--clip-height': '0%' })
+			tl.to(el, { '--clip-height': '100%', duration: 1, ease: 'none' })
+			return tl
 		})
 	}
 
@@ -92,9 +89,9 @@ class Home {
 	private dispose = () => {
 		this.scrollAnimeId && cancelAnimationFrame(this.scrollAnimeId)
 
-		this.gsapTweens.forEach(tween => {
-			tween.scrollTrigger?.kill()
-			tween.kill()
+		this.gsapTimelines.forEach(tl => {
+			tl.scrollTrigger?.kill()
+			tl.kill()
 		})
 
 		this.canvas.disposeCanvas()
