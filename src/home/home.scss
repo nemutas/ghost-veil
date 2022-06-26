@@ -98,14 +98,13 @@
 		}
 
 		&__list {
-			font-family: 'Roboto Mono', monospace;
 			font-size: max(15px, 2.2rem);
-			list-style: armenian;
-			padding-left: 2.3em;
+			list-style: disc;
+			padding-left: 1.3em;
 
 			display: flex;
 			flex-direction: column;
-			row-gap: 0.3em;
+			row-gap: 0.2em;
 		}
 	}
 }
