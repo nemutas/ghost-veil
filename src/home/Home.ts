@@ -62,6 +62,8 @@ class Home {
 
 	private setGsapAnimation = () => {
 		this.gsapTimelines = this.imageElements.map((el, i) => {
+			el.style.setProperty('--clip-height', '0%')
+
 			const tl = gsap.timeline({
 				scrollTrigger: {
 					scroller: this.scrollElement,
