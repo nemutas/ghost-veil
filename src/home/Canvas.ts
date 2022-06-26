@@ -82,4 +82,9 @@ export class Canvas extends TCanvas {
 		const mousePosition = Mouse2D.instance.normalizedPosition
 		this.flowmap?.update(this.mousePos.set(mousePosition.x, -mousePosition.y))
 	}
+
+	disposeCanvas = () => {
+		this.dispose()
+		Mouse2D.instance.dispose()
+	}
 }

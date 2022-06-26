@@ -35,5 +35,6 @@ export class Mouse2D {
 
 	dispose = () => {
 		window.removeEventListener('mousemove', this._handleMouseMove)
+		Mouse2D._instance = null
 	}
 }

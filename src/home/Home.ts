@@ -9,27 +9,31 @@ gsap.registerPlugin(ScrollTrigger)
 class Home {
 	private parentElement: HTMLElement
 	private scrollElement: HTMLDivElement
-	private imageElements: NodeListOf<HTMLImageElement>
+	private imageElements: HTMLImageElement[]
 
+	private scrollAnimeId?: number
 	private scrollCurrent = 0
 	private scrollTarget = 0
+
+	private gsapTweens: gsap.core.Tween[] = []
+
+	private canvas: Canvas
 
 	constructor() {
 		this.parentElement = document.querySelector<HTMLElement>('.home-main')!
 		this.scrollElement = document.querySelector<HTMLDivElement>('.home-contents')!
-		this.imageElements = document.querySelectorAll<HTMLImageElement>('.work__image')
+		this.imageElements = Array.from(document.querySelectorAll<HTMLImageElement>('.work__image'))
 
 		this.setStoreDatas()
 		this.setSmoothScroll()
 		this.setGsapAnimation()
+		this.setLifecycle()
 
-		new Canvas(this.parentElement)
+		this.canvas = new Canvas(this.parentElement)
 	}
 
 	private setStoreDatas = () => {
-		this.imageElements.forEach(() => {
-			datas.scrollProgress.push(0)
-		})
+		datas.scrollProgress = this.imageElements.map(() => 0)
 	}
 
 	private setSmoothScroll = () => {
@@ -47,7 +51,7 @@ class Home {
 		}
 
 		const anime = () => {
-			requestAnimationFrame(anime)
+			this.scrollAnimeId = requestAnimationFrame(anime)
 
 			this.scrollCurrent = lerp(this.scrollCurrent, this.scrollTarget, 0.08)
 			this.scrollElement.scrollTo({ left: this.scrollCurrent })
@@ -57,8 +61,8 @@ class Home {
 	}
 
 	private setGsapAnimation = () => {
-		this.imageElements.forEach((el, i) => {
-			gsap.fromTo(
+		this.gsapTweens = this.imageElements.map((el, i) => {
+			const tween = gsap.fromTo(
 				el,
 				{ '--clip-height': '0%' },
 				{
@@ -75,7 +79,25 @@ class Home {
 					}
 				}
 			)
+			return tween
 		})
+	}
+
+	private setLifecycle = () => {
+		window.addEventListener('beforeunload', () => {
+			this.dispose()
+		})
+	}
+
+	private dispose = () => {
+		this.scrollAnimeId && cancelAnimationFrame(this.scrollAnimeId)
+
+		this.gsapTweens.forEach(tween => {
+			tween.scrollTrigger?.kill()
+			tween.kill()
+		})
+
+		this.canvas.disposeCanvas()
 	}
 }
 
