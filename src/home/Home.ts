@@ -26,8 +26,11 @@ class Home {
 
 		this.setStoreDatas()
 		this.setSmoothScroll()
-		this.setGsapAnimation()
 		this.setLifecycle()
+
+		window.addEventListener('DOMContentLoaded', () => {
+			this.setGsapAnimation()
+		})
 
 		this.canvas = new Canvas(this.parentElement)
 	}
@@ -62,8 +65,6 @@ class Home {
 
 	private setGsapAnimation = () => {
 		this.gsapTimelines = this.imageElements.map((el, i) => {
-			el.style.setProperty('--clip-height', '0%')
-
 			const tl = gsap.timeline({
 				scrollTrigger: {
 					scroller: this.scrollElement,
