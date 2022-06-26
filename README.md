@@ -26,8 +26,8 @@ In this layer, the UVs of the screen are distorted and also made transparent in 
 - GSAP
 
 # Reference
-- [Yudouhu Portfolio](https://yudouhu.org/)
-- [Alien.js - flowmap](https://github.com/pschroen/alien.js/)
+- [Yudouhu Portfolio](https://yudouhu.org/) - created by [itoh](https://twitter.com/FrontArtGraph)
+- [Alien.js - flowmap](https://github.com/pschroen/alien.js/) - created by [Patrick Schroen](https://twitter.com/pschroen)
 
 # License
 
