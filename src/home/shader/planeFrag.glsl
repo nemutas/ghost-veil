@@ -9,7 +9,7 @@ void main() {
   float gray = (tex.r + tex.g + tex.b) / 3.0;
   gray *= 0.5;
 
-  float speed = 1.5 + cnoise21(v_uv * 10.0);
+  float speed = (cnoise21(v_uv * 10.0) + 1.0) * 0.5;
   float edge = pow(1.0 - u_progress, speed);
   float a = step(edge, v_uv.y);
 

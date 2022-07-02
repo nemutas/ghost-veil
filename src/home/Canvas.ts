@@ -75,7 +75,7 @@ export class Canvas extends TCanvas {
 
 		this.dsPlanes.forEach((plane, i) => {
 			plane.update()
-			this.currentProgress[i] = THREE.MathUtils.lerp(this.currentProgress[i], datas.scrollProgress[i], 0.005)
+			this.currentProgress[i] = THREE.MathUtils.lerp(this.currentProgress[i], datas.scrollProgress[i], 0.01)
 			plane.material.uniforms.u_progress.value = this.currentProgress[i]
 		})
 
