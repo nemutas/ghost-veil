@@ -5,6 +5,7 @@ import glsl from 'vite-plugin-glsl';
 export default defineConfig({
 	root: './src',
 	base: '/ghost-veil/',
+	publicDir: '../public',
 	plugins: [glsl()],
 	build: {
 		rollupOptions: {

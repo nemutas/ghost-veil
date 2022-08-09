@@ -14,6 +14,7 @@ class Home {
 	private scrollAnimeId?: number
 	private scrollCurrent = 0
 	private scrollTarget = 0
+	private prevWheel = 0
 
 	private gsapTimelines: gsap.core.Timeline[] = []
 
@@ -41,7 +42,14 @@ class Home {
 
 	private setSmoothScroll = () => {
 		this.scrollElement.onwheel = e => {
-			let scroll = this.scrollElement.scrollLeft + e.deltaY * 3
+			let dy = 0
+			const absDeltaY = Math.abs(e.deltaY)
+			if (0 <= absDeltaY - this.prevWheel) {
+				dy = 0 < e.deltaY ? 300 : -300
+			}
+			this.prevWheel = absDeltaY
+
+			let scroll = this.scrollElement.scrollLeft + dy
 			scroll = Math.min(scroll, this.scrollElement.scrollWidth - this.scrollElement.offsetWidth)
 			this.scrollTarget = scroll
 		}
