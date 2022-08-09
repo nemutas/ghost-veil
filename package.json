@@ -5,7 +5,7 @@
 	"version": "0.0.0",
 	"scripts": {
 		"start": "vite",
-		"build": "tsc && vite build --emptyOutDir",
+		"build": "tsc && vite build",
 		"preview": "vite preview",
 		"deploy": "npm run build && gh-pages -d dist"
 	},

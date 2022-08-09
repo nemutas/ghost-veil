@@ -13,6 +13,7 @@ export default defineConfig({
 				home: path.resolve(__dirname, './src/index.html')
 			}
 		},
-		outDir: '../dist'
+		outDir: '../dist',
+		emptyOutDir: true
 	}
 })
